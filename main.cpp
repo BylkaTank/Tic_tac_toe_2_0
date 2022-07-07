@@ -9,13 +9,23 @@ int main() {
 
     for(int i = 0; i < 9; i++){
 
-        for(int j = 0; j < 3; j++){
-            for(int i = 0; i < 3; i++){
-                if (field[i][j] == 'X' || field[j][i] == 'X'){
-                    countX++;
-                } else if (field[i][j] == 'O' || field[j][i] == 'O'){
-                    countO++;
-                }
+        for(int Y = 0; Y < 3; Y++){
+            for (int X = 0; X < 3; X++) {
+                if (field[Y][X] == 'X') countX++;
+                else if (field[Y][X] == 'O') countO++;
+
+            }
+            if (countX == 3 || countO == 3){
+                break;
+            } else {
+                countO = 0;
+                countX = 0;
+            }
+
+            for (int X = 0; X < 3; X++) {
+                if (field[X][Y] == 'X') countX++;
+                else if (field[X][Y] == 'O') countO++;
+
             }
             if (countX == 3 || countO == 3){
                 break;
@@ -28,8 +38,10 @@ int main() {
         if (countX == 3 || countO == 3){
             break;
         }
-        cout << "Enter the coordinates of the cell: ";
-        cin >> x >> y;
+        cout << "Enter the coordinates of the cell: X:";
+        cin >> x;
+        cout << "Y: ";
+        cin >> y;
         if (x > 2 || y > 2){
             cout << "Error!";
             i--;
@@ -37,7 +49,7 @@ int main() {
             if (i % 2 == 0){
                 field[x][y] = 'X';
             } else {
-                field[x][y] = 'Y';
+                field[x][y] = 'O';
             }
         } else {
             cout << "The cage is already occupied. Enter the coordinates again.";
